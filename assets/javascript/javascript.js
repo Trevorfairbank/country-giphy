@@ -12,8 +12,17 @@ function createButtons() {
     }
 }
 
-createButtons();
+//createButtons();
+$("#add-country").on("click", function (event) {
+    event.preventDefault();
 
+    // grabs text written inside input field
+    var country = $("#country-input").val();
+    //adds whatever is written to the array
+    topics.push(country);
+    //then runs create button function
+    createButtons();
+})  
 
 function getGiphy(name) {
 
@@ -30,14 +39,18 @@ function getGiphy(name) {
             img.addClass("giphy-image");
             //img.attr("src",giphyArray[i].images.original.url);
             img.attr("src", giphyArray[i].images.original_still.url);
-            img.attr("alt", name)
-            img.attr("data-state", "still")
+            img.attr("alt", name);
+            img.attr("data-state", "still");
+            img.attr("stillURL", giphyArray[i].images.original_still.url);
+            img.attr("animateURL", giphyArray[i].images.original.url);
 
-            $("#gifs").append(img);
 
             var p = $("<p>");
             p.text("Rating: " + giphyArray[i].rating);
-            $("#gifs").append(p);
+            $("#gifs").prepend(p);
+
+            $("#gifs").prepend(img);
+
 
         }
 
@@ -45,16 +58,16 @@ function getGiphy(name) {
         $(document).on("click", ".giphy-image", function () {
 
             console.log(this);
-            //create an attribute for the image for data-state to still.
+            //dataState now equals the attribute data-state of each button
             var dataState = $(this).attr("data-state");
 
             if (dataState === "still") {
-                $(this).attr("src", giphyArray[i].images.original.url);
-                $(this).attr(dataState, "animate");
+                $(this).attr("src", $(this).attr("animateURL"));
+                $(this).attr("data-state", "animate");
             }
             else {
-                $(this).attr("src", giphyArray[i].images.original_still.url);
-                $(this).attr(dataState, "still");
+                $(this).attr("src", $(this).attr("stillURL"));
+                $(this).attr("data-state", "still");
             }
 
         })
@@ -65,20 +78,11 @@ function getGiphy(name) {
     });
 }
 
-$("#add-country").on("click", function (event) {
-    event.preventDefault();
-
-    // grabs text written inside input field
-    var country = $("#country-input").val();
-    //adds whatever is written to the array
-    topics.push(country);
-    //then runs create button function
-    createButtons();
-})  
-
 $(document).on("click", ".country-button", function(){
     var name = $(this).attr("data-name");
     getGiphy(name);
 
 });
+
+createButtons();
 
