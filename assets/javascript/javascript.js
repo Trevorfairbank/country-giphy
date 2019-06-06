@@ -1,4 +1,4 @@
-var topics = ["Russia", "Germany", "France", "Spain", "Ireland", "Portugal", "Morocco", "Ghana", "South Africa", "Botswana", "Zimbabwe", "Argentina", "Brazil", "Cuba", "Colombia", "Panama", "Costa Rica", "Nicaragua", "Guatemala", "Mexico", "Belize"]
+var topics = ["Russia", "Germany", "France", "Spain", "Ireland", "Portugal", "Morocco", "Ghana", "South Africa", "Botswana", "Zimbabwe", "Argentina", "Brazil", "Cuba", "Colombia", "Panama", "Costa Rica", "Nicaragua", "Guatemala", "Belize"]
 
 
 function createButtons() {
@@ -23,6 +23,33 @@ $("#add-country").on("click", function (event) {
     //then runs create button function
     createButtons();
 })  
+
+createButtons();
+
+$(document).on("click", ".country-button", function(){
+    var name = $(this).attr("data-name");
+    getGiphy(name);
+
+});
+
+ //targets giphy image on click and runs a function
+ $(document).on("click", ".giphy-image", function () {
+
+    console.log(this);
+    //dataState now equals the attribute data-state of each button
+    var dataState = $(this).attr("data-state");
+
+    if (dataState === "still") {
+        $(this).attr("src", $(this).attr("animateURL"));
+        $(this).attr("data-state", "animate");
+    }
+    else {
+        $(this).attr("src", $(this).attr("stillURL"));
+        $(this).attr("data-state", "still");
+    }
+
+})
+
 
 function getGiphy(name) {
 
@@ -54,35 +81,7 @@ function getGiphy(name) {
 
         }
 
-        //targets giphy image on click and runs a function
-        $(document).on("click", ".giphy-image", function () {
-
-            console.log(this);
-            //dataState now equals the attribute data-state of each button
-            var dataState = $(this).attr("data-state");
-
-            if (dataState === "still") {
-                $(this).attr("src", $(this).attr("animateURL"));
-                $(this).attr("data-state", "animate");
-            }
-            else {
-                $(this).attr("src", $(this).attr("stillURL"));
-                $(this).attr("data-state", "still");
-            }
-
-        })
-
-
-
-
     });
 }
 
-$(document).on("click", ".country-button", function(){
-    var name = $(this).attr("data-name");
-    getGiphy(name);
-
-});
-
-createButtons();
 

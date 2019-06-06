@@ -1,3 +1,26 @@
+body {
+    background-image: url("https://upload.wikimedia.org/wikipedia/commons/1/1d/BlankMap-World-WWII.PNG")
+}
+
 button {
     padding:20px;
 }
+
+label {
+    font-family: 'Bangers', cursive;
+    font-size: 20px;
+    letter-spacing: 10px;
+}
+
+#add-country {
+    font-family: 'Bangers', cursive;
+    font-size: 20px;
+    letter-spacing: 5px;
+    margin-left:10px;
+}
+
+.country-button {
+    background-color:#B0E0E6;
+    font-family: 'Alfa Slab One', cursive;
+}
+
